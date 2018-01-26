@@ -7,7 +7,7 @@
 ### Think OS Chapter 1 reading questions
 
 1) Give an example of a feature common in interpreted languages that is rare in compiled languages.
-- Dynamic types: Unline in a compiled language, you don't have to explicitly declare a variarble type in an interpreted language.
+- Dynamic types: Unlike in a compiled language, you don't have to explicitly declare a variarble type in an interpreted language.
 
 2) Name two advantages of static typing over dynamic typing.
 - Static typing saves space because there is no need to save a variable names and type in a memory while running a program.
