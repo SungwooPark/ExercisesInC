@@ -2,7 +2,7 @@
 a.out
 *~
 *.py[co]
-
+*.s
 
 exercises/ex05/data
 exercises/ex09/fork
