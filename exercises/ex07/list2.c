@@ -54,7 +54,10 @@ void print_list(Node *list) {
 */
 Node *pop(Node *list, int *value_p) {
     // FILL THIS IN
-    return list;
+    *value_p = list->val;
+    Node *next_node = list->next;
+    free(list);
+    return next_node;
 }
 
 /* Adds a new element to the beginning of the list.
