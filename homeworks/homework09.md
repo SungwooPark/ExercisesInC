@@ -9,7 +9,7 @@ student repository.
 
 Thread Diagram
 
-[Thread diagram](thread_diagram.jpg)
+![Thread diagram](thread_diagram.jpg)
 
 ### Think OS Chapter 9 reading questions
 
