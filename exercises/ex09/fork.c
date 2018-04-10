@@ -19,6 +19,8 @@ License: MIT License https://opensource.org/licenses/MIT
 // error information
 extern int errno;
 
+//To see if parent and child thread share a global variable
+int global_var = 2;
 
 // get_seconds returns the number of seconds since the
 // beginning of the day, with microsecond precision
@@ -30,10 +32,12 @@ double get_seconds() {
 }
 
 
-void child_code(int i)
+void child_code(int i, int *heap_var)
 {
     sleep(i);
     printf("Hello from child %d.\n", i);
+    global_var = 50;
+    *heap_var = 50;
 }
 
 // main takes two parameters: argc is the number of command-line
@@ -45,6 +49,11 @@ int main(int argc, char *argv[])
     pid_t pid;
     double start, stop;
     int i, num_children;
+
+    int *heap_var = malloc(sizeof(int));
+    *heap_var = 2;
+
+    int local_var = 2;
 
     // the first command-line argument is the name of the executable.
     // if there is a second, it is the number of children to create.
@@ -72,7 +81,8 @@ int main(int argc, char *argv[])
 
         /* see if we're the parent or the child */
         if (pid == 0) {
-            child_code(i);
+            child_code(i, heap_var);
+            local_var = 50;
             exit(i);
         }
     }
@@ -93,6 +103,16 @@ int main(int argc, char *argv[])
         status = WEXITSTATUS(status);
         printf("Child %d exited with error code %d.\n", pid, status);
     }
+
+    //If parent and child process share a variable,
+    //the variable value should be 50.
+    printf("Global variable value: %d\n", global_var);
+    printf("Heap variable value: %d\n", *heap_var);
+    printf("Local variable value: %d\n", local_var);
+
+    //Based on the result above, it seems like parent and child
+    //processes do not share global, heap, or stack segment.
+
     // compute the elapsed time
     stop = get_seconds();
     printf("Elapsed time = %f seconds.\n", stop - start);
