@@ -7,6 +7,10 @@ student repository.
 
 [Here is a link to the ex09 directory in my repository](https://github.com/SungwooPark/ExercisesInC/tree/master/exercises/ex09)
 
+Thread Diagram
+
+[Thread diagram](thread_diagram.jpg)
+
 ### Think OS Chapter 9 reading questions
 
 1) Why does each thread have its own stack?
