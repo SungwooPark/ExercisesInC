@@ -12,8 +12,10 @@ student repository.
 1) Why is is a bad idea to pass a `sem_t` as a parameter?
 
 2) When you use a Semaphore as a mutex, what should its initial value be?
+- 1, to represented an "unlocked state".
 
 3) Can you think of another use for a Semaphore where you might use a different initial value?
+- When you want to let multiple threads to be running.
 
 4) In my solution to the producers-consumers problem using Semaphores,
 what does it mean if the value of `queue->spaces` is `3` at some point in time?
@@ -25,9 +27,5 @@ what does it mean if the value of `queue->spaces` is `3` at some point in time?
 7) Any problem that can be solved with Semaphores can also be solved with mutexes and condition variables.
 How can you prove that that's true?
 
-8) What is Property 3?  Hint: see *The Little Book of Semaphores*, 
-[Section 4.3](http://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf). 
-
-
-
-
+8) What is Property 3?  Hint: see *The Little Book of Semaphores*,
+[Section 4.3](http://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf).
