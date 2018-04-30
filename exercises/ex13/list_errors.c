@@ -200,6 +200,17 @@ int main() {
     printf("test_list\n");
     print_list(&test_list);
 
+    //freeing linked list
+    Node *head_node = test_list;
+    Node *next_node = test_list->next;
+    Node *temp_node;
+    free(head_node);
+    while (next_node != NULL) {
+      temp_node = next_node->next;
+      free(next_node);
+      next_node = temp_node;
+    }
+
     // make an empty list
     printf("empty\n");
     Node *empty = NULL;
@@ -207,9 +218,19 @@ int main() {
     // add an element to the empty list
     insert_by_index(&empty, 1, 0);
     print_list(&empty);
+    free(empty);
 
     Node *something = make_something();
-    free(something);
+    //freeing linked list 'something'
+    Node *head = something;
+    Node *next = something->next;
+    Node *temp;
+    free(head);
+    while (next != NULL) {
+      temp = next->next;
+      free(next);
+      next = temp;
+    }
 
     return 0;
 }
