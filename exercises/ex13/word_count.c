@@ -56,6 +56,7 @@ void accumulator(gpointer key, gpointer value, gpointer user_data)
         (gpointer) pair,
         (GCompareDataFunc) compare_pair,
         NULL);
+    free(pair);
 }
 
 /* Increments the frequency associated with key. */
@@ -67,6 +68,7 @@ void incr(GHashTable* hash, gchar *key)
         gint *val1 = g_new(gint, 1);
         *val1 = 1;
         g_hash_table_insert(hash, key, val1);
+        free(val1);
     } else {
         *val += 1;
     }
@@ -105,17 +107,19 @@ int main(int argc, char** argv)
             incr(hash, array[i]);
         }
     }
+    //It seems like I have to free array here to fix memory leak but I'm
+    //not sure how exactly to do that :(
     fclose(fp);
 
     // print the hash table
-    // g_hash_table_foreach(hash, (GHFunc) kv_printor, "Word %s freq %d\n");
+    //g_hash_table_foreach(hash, (GHFunc) kv_printor, "Word %s freq %d\n");
 
     // iterate the hash table and build the sequence
     GSequence *seq = g_sequence_new(NULL);
     g_hash_table_foreach(hash, (GHFunc) accumulator, (gpointer) seq);
 
     // iterate the sequence and print the pairs
-    g_sequence_foreach(seq, (GFunc) pair_printor, NULL);
+    //g_sequence_foreach(seq, (GFunc) pair_printor, NULL);
 
     // try (unsuccessfully) to free everything
     g_hash_table_destroy(hash);
